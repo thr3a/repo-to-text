@@ -19,3 +19,7 @@ options:
 ```sh
 python repo-to-text.py -d ./src -f package.json -e .ts .tsx > result.md
 ```
+
+```sh
+docker run --rm -v ./:/app thr3a/repo2text -d /app -f package.json vite.config.ts
+```
