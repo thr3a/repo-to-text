@@ -1,7 +1,7 @@
-import os
 import argparse
-from typing import List, Set
+import os
 import pathlib
+from typing import List, Set
 
 
 def find_files(
@@ -101,7 +101,16 @@ def generate_tree_structure(
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        epilog="""
+使用例:
+  - 指定したディレクトリ内の TypeScript ファイルを検索:
+    -d src -e .ts .tsx
+  - 特定のファイルだけを検索:
+    -f pyproject.toml Dockerfile
+""",
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
     parser.add_argument(
         "-d",
         "--directories",
