@@ -114,7 +114,7 @@ def main():
         "-d",
         "--directories",
         nargs="+",
-        default=[],
+        default=["./"],
         help="検索対象のディレクトリパス (複数指定可能)",
     )
     parser.add_argument(
@@ -151,9 +151,10 @@ def main():
     print()
 
     for file_path, content in found_files:
-        print(f"File: {file_path}")
-        print(content)
         print("---")
+        print(f"File: {file_path}")
+        print("---")
+        print(content)
 
 
 if __name__ == "__main__":
