@@ -1,15 +1,14 @@
 import argparse
 import os
 import pathlib
-from typing import List, Set
 
 
 def find_files(
-    directories: List[str],
-    files: List[str],
-    ignore_dirs: Set[str],
-    extensions: Set[str],
-) -> List[tuple[str, str]]:
+    directories: list[str],
+    files: list[str],
+    ignore_dirs: set[str],
+    extensions: set[str],
+) -> list[tuple[str, str]]:
     """指定されたディレクトリとファイルから、条件に一致するファイルを探し、ファイルパスと内容のタプルをリストで返す
 
     Args:
@@ -21,7 +20,7 @@ def find_files(
     Returns:
         List[tuple[str, str]]: ファイルパスとファイル内容のタプルのリスト
     """
-    found_files: List[tuple[str, str]] = []
+    found_files: list[tuple[str, str]] = []
 
     # ディレクトリ内のファイルを検索
     for directory in directories:
@@ -34,7 +33,7 @@ def find_files(
                 if not extensions or pathlib.Path(file).suffix in extensions:
                     file_path = pathlib.Path(root) / file
                     try:
-                        with open(file_path, "r", encoding="utf-8") as f:
+                        with open(file_path, encoding="utf-8") as f:
                             content = f.read()
                             relative_path = file_path.relative_to(pathlib.Path.cwd())
                             found_files.append((str(relative_path), content))
@@ -45,7 +44,7 @@ def find_files(
     for file in files:
         file_path = pathlib.Path(file).resolve()
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, encoding="utf-8") as f:
                 content = f.read()
                 relative_path = file_path.relative_to(pathlib.Path.cwd())
                 found_files.append((str(relative_path), content))
@@ -56,7 +55,7 @@ def find_files(
 
 
 def generate_tree_structure(
-    found_files: List[tuple[str, str]],
+    found_files: list[tuple[str, str]],
 ) -> str:
     """
     ファイルリストからディレクトリ構造を生成する
@@ -142,9 +141,7 @@ def main():
 
     args = parser.parse_args()
 
-    found_files = find_files(
-        args.directories, args.files, set(args.ignore_dirs), set(args.extensions)
-    )
+    found_files = find_files(args.directories, args.files, set(args.ignore_dirs), set(args.extensions))
 
     print("Directory Structure:")
     print("```")
