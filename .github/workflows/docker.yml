@@ -34,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: thr3a/repo2txt
+          images: thr3a/repo2text
           tags: |
             type=raw,value=latest
             type=sha,prefix=,format=short
